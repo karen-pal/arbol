@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <!--link rel="stylesheet" href="style.css"--!>
+    <style>
+    body {
+        background:black;
+    }
+    .container {
+        height: 100vh;
+    }
+
+    .container img {
+        max-width: 100%;
+        max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    }
+    .custom-field::after {
+  content: attr(aria-label);
+}
+.custom-field input {
+
+
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: rgba(100,100,100,.5);
+  padding: 12px;
+  border-radius: 3px;
+    position:fixed;
+    left:50%;
+    top:50%;
+    z-index:10000;
+  font-size: 14px;
+}
+          button {
+              display:none;}
+    </style>
+  </head>
+  <body>
+      <div class="container">
+      <img src="./output_test.png"/>
+      </div>
+      <div class="input">
+          {
+            <label class="custom-field" >
+          <input type="text" id="exec">
+            <button id="myButton" onclick="buttonCode()">Submit</button>
+            </label>
+          }
+      </div>
+    <script>
+        document.getElementById("exec")
+            .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("myButton").click();
+            }
+        });
+        function buttonCode()
+        {
+            let text = document.getElementById("exec").value;
+            let data = {element: text};
+
+            fetch("http://localhost:3000/exec", {
+              method: "POST",
+              headers: {'Content-Type': 'application/json'}, 
+              body: JSON.stringify(data)
+            },
+{
+    mode: 'no-cors',
+    method: 'post',
+    url: `http://localhost:3000`,
+    credentials: 'include'
+  }
+            ).then(res => {
+              console.log("Request complete! response:", res);
+            });
+          alert(text);
+        }
+    </script>
+	<!--script src="index.js"></script--!>
+  </body>
+</html>
