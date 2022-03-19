@@ -1,4 +1,21 @@
-Muchos prerequisitos (estàs avisade)
+arbol
+============
+
+¿¿¿????
+
+Entorno de generación de ASTs en vivo
+
+para performance en vivo con Marmotas Dream
+
+Software MADE IN CÓRDOBA, ARGENTINA
+
+Maxima SEMIOSIS
+
+por KAREN PALACIO aka kardaver
+
+# Instalar y Correr
+
+> Muchos prerequisitos (estàs avisade)
 
 Crear virtualenv con requerimientos de requirements.txt
 
