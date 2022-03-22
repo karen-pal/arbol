@@ -23,13 +23,6 @@ Crear virtualenv con requerimientos de requirements.txt
 pip install -r requirements.txt
 `
 
-Instalar requerimientos para el server node
-```
-npm init
-npm install
-```
-
-
 
 Mantener corriendo stanford core NLP  server (en port 9000)
 `
@@ -38,7 +31,19 @@ java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -t
 
 Tener abierta index.html en un navegador
 
+levantar servidor de python
 
-Tener corriendo el servidor nodejs (en port 3000)
+`
+python3 syntax_tree.py
+`
 
-`node server.js`
+WIP: espera inputs desde consola
+
+`
+python3 word_graph.py
+`
+
+
+# Recursos
+
+* [hyponym graph copy pasted from](https://stackoverflow.com/questions/39824133/networkx-and-wordnet)
