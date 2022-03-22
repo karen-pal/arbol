@@ -5,7 +5,13 @@ from nltk.corpus import wordnet as wn
 import networkx as nx
 import matplotlib.pyplot as plt
 import sys
-
+plt.style.use('dark_background')
+params = {"ytick.color" : "white",
+          "xtick.color" : "white",
+          "axes.labelcolor" : "white",
+          "axes.edgecolor" : "white",
+          "text.color":"white"}
+plt.rcParams.update(params)
 def graph(word):
     def closure_graph(synset, fn):
         seen = set()
@@ -42,7 +48,7 @@ def graph(word):
     plt.rc('figure', figsize=(20, 10))
     node_size = [index[n]*5000 for n in G]
     pos = nx.spring_layout(G)
-    nx.draw_networkx(G, pos, node_size=node_size, edge_color='r', alpha=.6, linewidths=.2)
+    nx.draw_networkx(G, pos, node_size=node_size, edge_color='r', alpha=.6, linewidths=.2, font_color="whitesmoke")
     plt.show()
     plt.savefig('output_word.png',bbox_inches='tight')
     plt.close()
