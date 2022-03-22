@@ -31,14 +31,14 @@
   -ms-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: rgba(100,100,100,.5);
+  background: rgba(224,255,232, .5);
   padding: 12px;
   border-radius: 3px;
     position:fixed;
     left:50%;
     top:50%;
     z-index:10000;
-  font-size: 14px;
+  font-size: 50px;
 }
           button {
               display:none;}
@@ -51,7 +51,7 @@
       <div class="input">
           {
             <label class="custom-field" >
-          <input type="text" id="exec">
+          <input type="text" id="exec" size="100">
             <button id="myButton" onclick="buttonCode()">Submit</button>
             </label>
           }
@@ -69,21 +69,21 @@
             let text = document.getElementById("exec").value;
             let data = {element: text};
 
-            fetch("http://localhost:3000/exec", {
+            fetch("http://127.0.0.1:5000/exec", {
               method: "POST",
               headers: {'Content-Type': 'application/json'}, 
               body: JSON.stringify(data)
             },
-{
-    mode: 'no-cors',
-    method: 'post',
-    url: `http://localhost:3000`,
-    credentials: 'include'
-  }
+          {
+            mode: 'no-cors',
+            method: 'post',
+            url: `http://127.0.0.1:5000/`,
+            credentials: 'include'
+          }
             ).then(res => {
+                window.location.reload();
               console.log("Request complete! response:", res);
             });
-          alert(text);
         }
     </script>
 	<!--script src="index.js"></script--!>
