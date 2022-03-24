@@ -1,3 +1,7 @@
+
+import matplotlib
+matplotlib.use('Agg')
+
 from nltk.parse.corenlp import CoreNLPParser
 from nltk.draw.tree import TreeView
 from nltk.draw import TreeWidget
@@ -10,8 +14,6 @@ from flask import Flask, request, jsonify
 import logging
 from flask_cors import CORS
 import requests
-import matplotlib
-matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import time
 
@@ -38,6 +40,8 @@ def draw_syntax_tree(text="Have you practised so long to learn to read?"):
     cf.destroy('all')
     convert_to_png = "gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o output_test.svg output_test.ps"
     os.system(convert_to_png)
+    convert_to_svg = "convert output_test.svg output_test.svg"
+    os.system(convert_to_svg)
     app.logger.info("drawn")
 
 def draw_dep_tree():
