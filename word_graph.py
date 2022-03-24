@@ -7,6 +7,7 @@ from nltk.corpus import knbc, jeita
 import networkx as nx
 import matplotlib.pyplot as plt
 import sys
+import os
 #
 from flask import Flask, request, jsonify
 import logging
@@ -63,8 +64,12 @@ def graph(word):
     pos = nx.spring_layout(G)
     nx.draw_networkx(G, pos, node_size=node_size, edge_color='r', alpha=.6, linewidths=.2, font_color="whitesmoke")
     plt.show()
+    #fig, ax = plt.subplots()
+    plt.box(False)
     plt.savefig('output_word.png',bbox_inches='tight')
     plt.close()
+    convert_to_png = "convert output_word.png output_word.svg"
+    os.system(convert_to_png)
     print("drawn in disk")
     return
 
@@ -85,4 +90,4 @@ def exec():
     return ''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)

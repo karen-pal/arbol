@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <!--link rel="stylesheet" href="style.css"--!>
+    <style>
+    body {
+        background:black;
+    }
+    .container {
+        height: 100vh;
+    }
+
+    .container img {
+        max-width: 100%;
+        max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    }
+    .custom-field::after {
+  content: attr(aria-label);
+}
+.custom-field input {
+
+
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 12px;
+  border-radius: 3px;
+    position:fixed;
+    z-index:10000;
+  font-size: 50px;
+  color:rgba(224,222,222, .6);
+}
+          #exec_word {
+            background: rgba(224,100,100, .1);
+            bottom:0%;
+          }
+          #exec_tree {
+            background: rgba(224,255,232, .1);
+            top:0%;
+          }
+          img {
+            position:fixed;
+          }
+          button {
+              display:none;
+          }
+          #word{left:0%;}
+          #tree{right:0%;}
+          span{
+            position: absolute;
+            background: url(output_test.svg);
+            background-size: cover;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: animate 10s linear infinite;
+            }
+
+
+        @keyframes animate{
+            0%{
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+
+            100%{
+                transform: translate(-50%, -1000%);
+                opacity: 0;
+            }
+        }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+          <img id="word" src="output_word.svg"/>
+          <img id="tree" src="output_test.svg"/>
+
+      </div>
+      <!--tree--!>
+      <div class="input">
+          {
+            <label class="custom-field" >
+          <input type="text" id="exec_tree" size="100">
+            <button id="myButton" onclick="buttonCodeTree()">Submit</button>
+            </label>
+          }
+      </div>
+      <!--tree--!>
+      <!--word graph--!>
+                <div class="input">
+          {
+            <label class="custom-field" >
+          <input type="text" id="exec_word" size="100">
+            <button id="myWordButton" onclick="buttonCodeWord()">Submit</button>
+            </label>
+          }
+      </div>
+      <!--word graph--!>
+
+    <script>
+        // load logo inline for animation on hover
+        const loadLogo = async () => {
+          // get logo, parse source text, and insert text into doc
+          document.write(await (await fetch("output_test.svg")).text());
+          // remove fallback img logo
+          document.querySelector("img#tree").remove();
+          console.log("AAAAAAAAAA");
+        };
+        loadLogo();
+        document.getElementById("exec_tree")
+            .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("myButton").click();
+            }
+        });
+        function buttonCodeTree()
+        {
+            let text = document.getElementById("exec_tree").value;
+            let data = {element: text};
+
+            fetch("http://127.0.0.1:5005/exec", {
+              method: "POST",
+              headers: {'Content-Type': 'application/json'}, 
+              body: JSON.stringify(data)
+            },
+          {
+            mode: 'no-cors',
+            method: 'post',
+            url: `http://127.0.0.1:5005/`,
+            credentials: 'include'
+          }
+            ).then(res => {
+                window.location.reload();
+              console.log("Request complete! response:", res);
+            });
+        }
+        //word graph
+        document.getElementById("exec_word")
+            .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("myWordButton").click();
+            }
+        });
+        function buttonCodeWord()
+        {
+            let text = document.getElementById("exec_word").value;
+            let data = {element: text};
+
+            fetch("http://127.0.0.1:5000/exec", {
+              method: "POST",
+              headers: {'Content-Type': 'application/json'}, 
+              body: JSON.stringify(data)
+            },
+          {
+            mode: 'no-cors',
+            method: 'post',
+            url: `http://127.0.0.1:5000/`,
+            credentials: 'include'
+          }
+            ).then(res => {
+                window.location.reload();
+              console.log("Request complete! response:", res);
+            });
+        }
+
+        //animation
+        document.addEventListener("mousemove",function (e) {
+            var body = document.querySelector('body');
+            var bubbles = document.createElement("span");
+            var x = e.offsetX;
+            var y = e.offsetY;
+            bubbles.style.left = x+'px';
+            bubbles.style.top = y+'px';
+            var size = Math.random() * 100;
+            bubbles.style.width = 20 + size+'px';
+            bubbles.style.height = 20 + size+'px';
+            body.appendChild(bubbles);
+
+            setTimeout(function () {
+                bubbles.remove();
+            },4000)
+        })
+    </script>
+	<!--script src="index.js"></script--!>
+  </body>
+</html>

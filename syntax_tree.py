@@ -36,9 +36,7 @@ def draw_syntax_tree(text="Have you practised so long to learn to read?"):
     cf.add_widget(tc,10,10) # (10,10) offsets
     cf.print_to_file('output_test.ps')
     cf.destroy('all')
-    app.logger.debug("AAAAAAAAAAAAA antes de convert")
     convert_to_png = "gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o output_test.svg output_test.ps"
-    app.logger.debug("BBBBBBBBBBBBB despues de convert")
     os.system(convert_to_png)
     app.logger.info("drawn")
 
@@ -67,7 +65,7 @@ def exec():
     return ''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5005,debug=True)
 
 #if __name__ == "__main__":
 #    text=sys.argv[1]
