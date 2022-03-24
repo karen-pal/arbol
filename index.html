@@ -46,7 +46,7 @@
   </head>
   <body>
       <div class="container">
-      <img src="./output_test.png"/>
+      <img id="logo" src="output_test.svg"/>
       </div>
       <div class="input">
           {
@@ -57,9 +57,19 @@
           }
       </div>
     <script>
+        // load logo inline for animation on hover
+        const loadLogo = async () => {
+          // get logo, parse source text, and insert text into doc
+          document.write(await (await fetch("output_test.svg")).text());
+          // remove fallback img logo
+          document.querySelector("img#logo").remove();
+          console.log("AAAAAAAAAA");
+        };
+        loadLogo();
         document.getElementById("exec")
             .addEventListener("keyup", function(event) {
             event.preventDefault();
+            loadLogo();
             if (event.keyCode === 13) {
                 document.getElementById("myButton").click();
             }

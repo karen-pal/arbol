@@ -20,6 +20,7 @@ CORS(app)
 
 
 def draw_syntax_tree(text="Have you practised so long to learn to read?"):
+    app.logger.info("aca adentro")
     parser = CoreNLPParser()
     cf = CanvasFrame()
     #text = sys.argv[1] 
@@ -34,8 +35,10 @@ def draw_syntax_tree(text="Have you practised so long to learn to read?"):
     tc['line_color'] = '#175252'
     cf.add_widget(tc,10,10) # (10,10) offsets
     cf.print_to_file('output_test.ps')
-    cf.destroy()
-    convert_to_png = "gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o output_test.png output_test.ps"
+    cf.destroy('all')
+    app.logger.debug("AAAAAAAAAAAAA antes de convert")
+    convert_to_png = "gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o output_test.svg output_test.ps"
+    app.logger.debug("BBBBBBBBBBBBB despues de convert")
     os.system(convert_to_png)
     app.logger.info("drawn")
 
@@ -56,19 +59,11 @@ def draw_dep_tree():
     cf.print_to_file('tree3.ps')
     cf.destroy()
 
-@app.route("/", methods=['POST'])
-def hello_world():
-    print((jsonify(request.form["element"]))) 
-    1/0
-    return ''
 
 @app.route('/exec', methods=['GET', 'POST','DELETE', 'PATCH'])
 def exec():
     app.logger.info(request.json["element"])
-    try:
-        draw_syntax_tree(text=request.json["element"])
-    except:
-        pass
+    draw_syntax_tree(text=request.json["element"])
     return ''
 
 if __name__ == '__main__':

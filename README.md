@@ -43,6 +43,26 @@ WIP: espera inputs desde consola
 python3 word_graph.py
 `
 
+# servers
+
+sabiendo que syntax_tree se cae, para correrlo tranquilamente durante la performance levantar un nohup process
+
+usando el script de bash
+
+bash ./run.sh
+
+eso levanta un proceso en el background, para terminarlo despues hacer
+
+`
+ps -ef | grep "run.sh"
+`
+
+y 
+
+`
+kill PID
+`
+
 
 # Recursos
 
