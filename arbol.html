@@ -105,15 +105,6 @@
       <!--word graph--!>
 
     <script>
-        // load logo inline for animation on hover
-        const loadLogo = async () => {
-          // get logo, parse source text, and insert text into doc
-          document.write(await (await fetch("output_test.svg")).text());
-          // remove fallback img logo
-          document.querySelector("img#tree").remove();
-          console.log("AAAAAAAAAA");
-        };
-        loadLogo();
         document.getElementById("exec_tree")
             .addEventListener("keyup", function(event) {
             event.preventDefault();
@@ -173,14 +164,14 @@
         }
 
         //animation
-        document.addEventListener("mousemove",function (e) {
+        document.addEventListener("click",function (e) {
             var body = document.querySelector('body');
             var bubbles = document.createElement("span");
             var x = e.offsetX;
             var y = e.offsetY;
             bubbles.style.left = x+'px';
             bubbles.style.top = y+'px';
-            var size = Math.random() * 100;
+            var size = Math.random() * 1000;
             bubbles.style.width = 20 + size+'px';
             bubbles.style.height = 20 + size+'px';
             body.appendChild(bubbles);
