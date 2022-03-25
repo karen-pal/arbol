@@ -8,6 +8,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 import os
+from googletrans import Translator, constants
+from random import random
 #
 from flask import Flask, request, jsonify
 import logging
@@ -34,9 +36,18 @@ def graph(word):
                 seen.add(s)
                 graph.add_node(s.name())
                 for s1 in fn(s):
-                    graph.add_node(s1.name())
-                    print(s1.name()) 
-                    graph.add_edge(s.name(), s1.name())
+                    rnd_nm = random()
+                    if rnd_nm > .51:
+                        name=s1.name()
+                    else:
+                        only_name= s1.name().split(".")[0]
+                        only_name = only_name.replace("_", " ")
+                        spanish_name = Translator().translate(only_name, dest="es").text
+                        name = spanish_name.replace(" ","_") + "." + ".".join(s1.name().split(".")[1:])
+                    #name = s1.name()
+                    print(">>> ",name)
+                    graph.add_node(name)
+                    graph.add_edge(s.name(), name)
                     recurse(s1)
 
         res_amount = recurse(synset)
@@ -45,16 +56,14 @@ def graph(word):
     #word = sys.argv[1]
 
     dog = wn.synsets(word)[0]
-    print(type(dog))
-    print(dir(dog))
     G_hypo, length_hypo = closure_graph(dog,
                           lambda s: s.hyponyms())
     G_hyper, length_hyper = closure_graph(dog,
                           lambda s: s.hypernyms())
 
     res = [{"name":"hypo", "obj":G_hypo, "len":length_hypo}, {"name":"hyper", "obj":G_hyper, "len":length_hyper }]
-    print("hypo got ", length_hypo)
-    print("hyper got ", length_hyper)
+    print("hiponimos> ", length_hypo)
+    print("hiperónimos> ", length_hyper)
 
     G = max(res, key=lambda x:x["len"])["obj"]
 
@@ -66,11 +75,11 @@ def graph(word):
     plt.show()
     #fig, ax = plt.subplots()
     plt.box(False)
-    plt.savefig('output_word.png',bbox_inches='tight')
+    plt.savefig('output_word.png',bbox_inches='tight', transparent=True)
     plt.close()
     convert_to_png = "convert output_word.png output_word.svg"
     os.system(convert_to_png)
-    print("drawn in disk")
+    print("dibujado")
     return
 
 # while True:
