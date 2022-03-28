@@ -5,6 +5,9 @@ arbol
 
 Entorno de generación de ASTs en vivo
 
+búsqueda y dibujado de hiperónimos e hipónimos
+
+
 para performance en vivo con Marmotas Dream
 
 Software MADE IN CÓRDOBA, ARGENTINA
@@ -13,15 +16,26 @@ Maxima SEMIOSIS
 
 por KAREN PALACIO aka kardaver
 
+![lenguaje](./language.png)
+
+
 # Instalar y Correr
 
 > Muchos prerequisitos (estàs avisade)
+
+# Instalación
+
+Testeado solo para python 3.8
 
 Crear virtualenv con requerimientos de requirements.txt
 
 `
 pip install -r requirements.txt
 `
+
+Bajarse el stanford core NLP server
+
+# Correr
 
 
 Mantener corriendo stanford core NLP  server (en port 9000)
@@ -31,13 +45,11 @@ java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -t
 
 Tener abierta index.html en un navegador
 
-levantar servidor de python
+levantar servidores de python
 
 `
-python3 syntax_tree.py
+bash run.sh
 `
-
-WIP: espera inputs desde consola
 
 `
 python3 word_graph.py
