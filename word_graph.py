@@ -82,17 +82,12 @@ def graph(word):
     print("dibujado")
     return
 
-# while True:
-#     word = input()
-#     plt.close('all')
-#     graph(word)
 
 @app.route('/exec', methods=['GET', 'POST','DELETE', 'PATCH'])
 def exec():
     words = request.json["element"]
     app.logger.info(words)
     try:
-        graph(words)
         graph(words)
     except:
         pass
