@@ -1,8 +1,6 @@
 arbol
 ============
 
-¿¿¿????
-
 Entorno de generación de ASTs en vivo
 
 búsqueda y dibujado de hiperónimos e hipónimos
