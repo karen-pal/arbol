@@ -77,3 +77,14 @@ kill PID
 # Recursos
 
 * [hyponym graph copy pasted from](https://stackoverflow.com/questions/39824133/networkx-and-wordnet)
+
+* Código ntlk:
+```python
+#import nltk
+#nltk.download('wordnet')
+#nltk.download('omw-1.4')
+from nltk.corpus import wordnet as wn
+print(wn.synsets("recordar", lang='spa'))#es una lista
+wn.synsets("recordar", lang='spa')[0].definition() #devuelve str
+wn.synsets("recordar", lang='spa')[0].hyponyms() #devuelve lista
+```
